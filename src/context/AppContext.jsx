@@ -8,47 +8,47 @@ const mockCases = [
   {
     id: 1,
     name: 'Free Case',
-    image: '/src/assets/images/free-case.png',
+    image: '/assets/images/free-case.png',
     price: 0,
     background: '#0088FF',
     items: [
-      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/src/assets/images/teddy.png' },
-      { id: 2, name: 'Scroll', price: 24.06, image: '/src/assets/images/scroll.png' },
+      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/assets/images/teddy.png' },
+      { id: 2, name: 'Scroll', price: 24.06, image: '/assets/images/scroll.png' },
     ]
   },
   {
     id: 2,
     name: 'Heroic helmet',
-    image: '/src/assets/images/helmet.png',
+    image: '/assets/images/helmet.png',
     price: 5,
     background: '#8B4513',
     items: [
-      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/src/assets/images/teddy.png' },
-      { id: 2, name: 'Scroll', price: 24.06, image: '/src/assets/images/scroll.png' },
-      { id: 3, name: 'Frog', price: 1562.28, image: '/src/assets/images/frog.png' },
-      { id: 4, name: 'Diamond', price: 48.15, image: '/src/assets/images/diamond.png' },
+      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/assets/images/teddy.png' },
+      { id: 2, name: 'Scroll', price: 24.06, image: '/assets/images/scroll.png' },
+      { id: 3, name: 'Frog', price: 1562.28, image: '/assets/images/frog.png' },
+      { id: 4, name: 'Diamond', price: 48.15, image: '/assets/images/diamond.png' },
     ]
   },
   {
     id: 3,
     name: 'Dragon Scale',
-    image: '/src/assets/images/dragon.png',
+    image: '/assets/images/dragon.png',
     price: 10,
     background: '#FF4500',
     items: [
-      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/src/assets/images/teddy.png' },
-      { id: 2, name: 'Scroll', price: 24.06, image: '/src/assets/images/scroll.png' },
+      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/assets/images/teddy.png' },
+      { id: 2, name: 'Scroll', price: 24.06, image: '/assets/images/scroll.png' },
     ]
   },
   {
     id: 4,
     name: 'Burger',
-    image: '/src/assets/images/burger.png',
+    image: '/assets/images/burger.png',
     price: 15,
     background: '#FFD700',
     items: [
-      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/src/assets/images/teddy.png' },
-      { id: 2, name: 'Scroll', price: 24.06, image: '/src/assets/images/scroll.png' },
+      { id: 1, name: 'Teddy Bear', price: 10.91, image: '/assets/images/teddy.png' },
+      { id: 2, name: 'Scroll', price: 24.06, image: '/assets/images/scroll.png' },
     ]
   }
 ];
@@ -59,7 +59,7 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState({
     name: 'Dmitry',
     id: '#718903327',
-    avatar: '/src/assets/images/avatar.png',
+    avatar: '/assets/images/avatar.png',
     balance: 0.00,
     wallet: 'UQDKd...hxwP',
     inventory: []

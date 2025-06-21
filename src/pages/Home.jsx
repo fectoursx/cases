@@ -18,19 +18,19 @@ const Home = () => {
             <div className="live-indicator"></div>
           </div>
           <div className="case-icon">
-            <img src="/src/assets/images/wizard-hat.png" alt="Wizard Hat" />
+            <img src="/assets/images/wizard-hat.png" alt="Wizard Hat" />
           </div>
           <div className="case-icon">
-            <img src="/src/assets/images/token.png" alt="Token" />
+            <img src="/assets/images/token.png" alt="Token" />
           </div>
           <div className="case-icon">
-            <img src="/src/assets/images/token.png" alt="Token" />
+            <img src="/assets/images/token.png" alt="Token" />
           </div>
           <div className="case-icon">
-            <img src="/src/assets/images/gift.png" alt="Gift" />
+            <img src="/assets/images/gift.png" alt="Gift" />
           </div>
           <div className="case-icon">
-            <img src="/src/assets/images/token-gold.png" alt="Gold Token" />
+            <img src="/assets/images/token-gold.png" alt="Gold Token" />
           </div>
         </div>
         
