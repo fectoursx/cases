@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+
+# Vite/React build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables
+.env*
+
+# Mac system files
+.DS_Store
+
+# VSCode settings
+.vscode/
+
+# Local IDE settings
+.idea/
