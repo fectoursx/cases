@@ -12,12 +12,21 @@
   --primary-800: #434190;
   --primary-900: #3c366b;
 
+  /* Темные цвета для темы */
+  --color-background: #141415;
+  --color-text: #ffffff;
+  --color-live: #00ff00;
+
   /* Градиенты */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-success: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
 
   /* Размеры */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
@@ -30,12 +39,27 @@
   --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
 
   /* Отступы */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
+
+  /* Шрифты */
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 18px;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
   /* Переходы */
   --transition-fast: 0.15s ease;

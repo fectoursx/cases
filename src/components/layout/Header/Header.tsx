@@ -13,20 +13,30 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles.userInfo}>
-        <div className={styles.avatarContainer} onClick={handleProfileClick}>
-          <img src={user.avatar} alt="User avatar" className={styles.avatar} />
+    <header className={styles.userHeader}>
+      <div className={styles.userHeaderRow}>
+        <div className={styles.profile} onClick={handleProfileClick}>
+          <img src={user.avatar} alt="User Avatar" className={styles.avatar} />
+          <div className={styles.profileInfo}>
+            <div className={styles.profileName}>{user.name}</div>
+          </div>
         </div>
-        <span className={styles.username}>{user.name}</span>
-      </div>
-      
-      <div className={styles.walletInfo}>
-        <div className={styles.walletAddress}>
-          {user.wallet} <ChevronDown size={16} />
-        </div>
-        <div className={styles.balance}>
-          {user.balance.toFixed(2)} <span className={styles.token}>T</span>
+        
+        <div className={styles.walletSection}>
+          <div className={styles.walletDropdownContainer}>
+            <button className={styles.walletAddressButton}>
+              <span>{user.wallet || 'UQDKd...hxwP'}</span>
+              <ChevronDown size={10} />
+            </button>
+          </div>
+          <div className={styles.coinCountContainer} onClick={handleProfileClick}>
+            <div className={styles.coinCount}>{user.balance.toFixed(2)}</div>
+            <div className={styles.coinContainer}>
+              <div className={styles.coin}>
+                <div className={styles.coinIcon}>V</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>

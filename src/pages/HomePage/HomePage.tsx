@@ -2,60 +2,59 @@ import React from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { useCasesStore } from '@/store/casesStore';
 import { Header } from '@/components/layout/Header';
+import { LiveStatusBar } from '@/components/layout/LiveStatusBar';
 import { CaseCard } from '@/components/game/CaseCard';
 import { RouletteWheel } from '@/components/game/RouletteWheel';
 import { Button } from '@/components/ui/Button';
 import styles from './HomePage.module.css';
 
 export const HomePage: React.FC = () => {
-  const { cases } = useCasesStore();
+  const { cases, isLoading } = useCasesStore();
+
+  if (isLoading) {
+    return (
+      <div className={styles.homePage}>
+        <Header />
+        <div className={styles.loading}>Загрузка...</div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.homePage}>
       <Header />
       
       <div className={styles.casesContainer}>
-        {/* Верхний ряд с иконками "Live" */}
-        <div className={styles.casesRow}>
-          <div className={styles.caseIcon}>
-            <div className={styles.liveIndicator}>
-              <span className={styles.liveDot}></span>
-              Live
+        {/* Live status bar */}
+        <LiveStatusBar />
+
+        {/* Free case banner */}
+        <div className={styles.freeCaseBanner}>
+          <div className={styles.lightningIcon}>
+            <img src="/assets/images/lightning.svg" alt="Lightning" />
+          </div>
+          <div className={styles.bannerContent}>
+            <div className={styles.coinWrapper}>
+              <img src="/assets/images/wizard-hat.png" alt="Coin" />
             </div>
+            <div className={styles.bannerText}>Check our news</div>
           </div>
-          <div className={styles.caseIcon}>
-            <img src="/assets/images/wizard-hat.png" alt="Wizard Hat" />
-          </div>
-          <div className={styles.caseIcon}>
-            <img src="/assets/images/token.png" alt="Token" />
-          </div>
-          <div className={styles.caseIcon}>
-            <img src="/assets/images/token.png" alt="Token" />
-          </div>
-          <div className={styles.caseIcon}>
-            <img src="/assets/images/gift.png" alt="Gift" />
-          </div>
-          <div className={styles.caseIcon}>
-            <img src="/assets/images/token-gold.png" alt="Gold Token" />
-          </div>
-        </div>
-        
-        {/* Баннер новостей */}
-        <div className={styles.newsBanner}>
-          <div className={styles.newsIcon}>
-            <AlertTriangle size={20} />
-          </div>
-          <span className={styles.newsText}>Проверьте наши новости</span>
-          <Button size="sm" variant="outline">
-            Открыть @case
+          <Button size="sm" className={styles.telegramButton}>
+            Open @case
           </Button>
         </div>
         
         {/* Сетка кейсов */}
         <div className={styles.casesGrid}>
-          {cases.map((caseItem) => (
-            <CaseCard key={caseItem.id} caseData={caseItem} />
-          ))}
+          {cases.length > 0 ? (
+            cases.map((caseItem) => (
+              <CaseCard key={caseItem.id} caseData={caseItem} />
+            ))
+          ) : (
+            <div className={styles.noCases}>
+              Кейсы загружаются...
+            </div>
+          )}
         </div>
       </div>
       

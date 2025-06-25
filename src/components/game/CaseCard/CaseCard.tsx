@@ -33,26 +33,48 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseData }) => {
     openCase(caseData, false);
   };
 
+  // Генерируем цвета для радиального градиента на основе цены
+  const getGradientColor = (price: number) => {
+    if (price === 0) return '#23C265'; // Зеленый для бесплатных
+    if (price <= 1) return '#0095EA'; // Синий
+    if (price <= 5) return '#8A2BFF'; // Фиолетовый
+    if (price <= 15) return '#FF5C2B'; // Оранжевый
+    if (price <= 50) return '#FFAE00'; // Желтый
+    return '#FF484A'; // Красный для дорогих
+  };
+
+  const gradientColor = getGradientColor(caseData.price);
+  const backgroundStyle = caseData.price === 0 
+    ? {} // Для FREE кейса используем отдельный стиль
+    : {
+        background: `radial-gradient(61.63% 100.04% at 43.18% 123.86%, ${gradientColor}40 0%, ${gradientColor}00 100%), linear-gradient(rgba(20, 20, 21, 0) 0%, rgb(20, 20, 21) 100%)`
+      };
+
   return (
     <div 
-      className={styles.caseCard} 
+      className={`${styles.caseCard} ${caseData.price === 0 ? styles.freeCase : ''}`}
       onClick={handleOpenCase}
-      style={{ background: caseData.background }}
+      style={backgroundStyle}
     >
-      <img 
-        src={caseData.image} 
-        alt={caseData.name} 
-        className={styles.caseImage} 
-      />
-      <div className={styles.caseInfo}>
-        <h3 className={styles.caseName}>{caseData.name}</h3>
-        {caseData.price > 0 && (
+      <div className={styles.caseImageContainer}>
+        {caseData.price === 0 && (
+          <div className={styles.freeBadge}>
+            <span>NEW</span>
+          </div>
+        )}
+        <img 
+          src={caseData.image} 
+          alt={caseData.name} 
+          className={styles.caseImage} 
+        />
+      </div>
+      <div className={styles.caseFooter}>
+        {caseData.price > 0 ? (
           <div className={styles.casePrice}>
             {caseData.price} <span className={styles.token}>T</span>
           </div>
-        )}
-        {caseData.price === 0 && (
-          <div className={styles.freeLabel}>FREE</div>
+        ) : (
+          <div className={styles.freeLabel}>Free Case</div>
         )}
       </div>
     </div>

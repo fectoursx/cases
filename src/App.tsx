@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { useUIStore } from '@/store/uiStore';
 import { HomePage } from '@/pages/HomePage';
 import { ProfilePage } from '@/pages/ProfilePage';
+import { BottomNavigation } from '@/components/layout/BottomNavigation';
 import './App.css';
 
 const AppContent: React.FC = () => {
@@ -37,6 +38,7 @@ const AppContent: React.FC = () => {
   return (
     <div className="app-container">
       {renderPage()}
+      <BottomNavigation />
     </div>
   );
 };

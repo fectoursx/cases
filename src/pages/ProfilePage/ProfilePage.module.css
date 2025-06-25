@@ -1,128 +1,285 @@
 .profilePage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
+  background: var(--color-background);
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
 }
 
-.header {
+/* User Profile Section */
+.userProfile {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  justify-content: center;
+  padding: var(--spacing-16) 0;
 }
 
-.backButton {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.profileAvatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileDetails {
+  text-align: center;
+}
+
+.profileName {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-4);
+}
+
+.profileId {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  opacity: 0.7;
+}
+
+/* Balance Section */
+.balanceContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balanceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.balanceLabel {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  opacity: 0.7;
+}
+
+.balanceValue {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.tokenIcon {
+  width: 32px;
+  height: 32px;
+  background: #0090FF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+}
+
+.depositButton {
+  background: #0090FF;
+  color: white;
+  border: none;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.depositButton:hover {
+  background: #0080E6;
+}
+
+/* Wallet Section */
+.walletContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.walletInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.walletLabel {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  opacity: 0.7;
+}
+
+.walletAddress {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.disconnectButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.disconnectButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Invite Friends Section */
+.inviteContainer {
+  background: linear-gradient(135deg, #0090FF 0%, #00C9FF 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inviteContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.inviteIcon {
+  font-size: 24px;
+}
+
+.inviteText {
+  color: white;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.inviteButton {
+  background: white;
+  color: #0090FF;
+  border: none;
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inviteButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Inventory Section */
+.inventoryContainer {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-16);
+}
+
+.inventoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-16);
+}
+
+.inventoryLabel {
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.inventoryButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inventoryButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.inventorySection {
+  min-height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.backButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+.emptyInventory {
+  text-align: center;
+  color: var(--color-text);
+  opacity: 0.7;
 }
 
-.title {
+.emptyInventory p {
+  margin-bottom: var(--spacing-16);
+  font-size: var(--font-size-md);
+}
+
+.openCasesButton {
+  background: #0090FF;
   color: white;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0;
+  border: none;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.content {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.openCasesButton:hover {
+  background: #0080E6;
 }
 
-.userCard {
-  padding: 24px;
+.inventoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--spacing-12);
+  width: 100%;
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.avatar {
+.inventoryItem {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.userDetails {
-  flex: 1;
-}
-
-.userName {
-  font-size: 24px;
-  font-weight: 700;
-  color: #333;
-  margin: 0 0 4px 0;
-}
-
-.userId {
-  color: #666;
-  font-size: 14px;
-  margin: 0;
-}
-
-.balanceCard {
-  padding: 24px;
-}
-
-.balanceHeader {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
-  gap: 12px;
-  color: #333;
-  font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 16px;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.balanceAmount {
-  font-size: 36px;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 16px;
-}
-
-.token {
-  color: #667eea;
-  font-weight: 800;
-}
-
-.walletInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.walletConnected {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  color: #666;
-  font-size: 14px;
-}
-
-.inventoryCard {
-  padding: 24px;
+.itemImage {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 
 .inventoryHeader {

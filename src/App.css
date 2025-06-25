@@ -134,6 +134,7 @@ body {
   width: 100%;
   min-height: 100vh;
   position: relative;
+  padding-bottom: 120px; /* Space for bottom navigation (70px height + 16px bottom spacing + some extra) */
 }
 
 /* Загрузчик */
