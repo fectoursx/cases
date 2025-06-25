@@ -1,0 +1,24 @@
+@import './styles/variables.css';
+@import './styles/globals.css';
+@import './styles/animations.css';
+
+/* Дополнительные глобальные стили для приложения */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Скрытие скроллбара для рулетки */
+.roulette-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.roulette-viewport {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

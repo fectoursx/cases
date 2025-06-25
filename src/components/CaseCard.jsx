@@ -1,10 +1,10 @@
 import { useApp } from '../context/AppContext';
 
 const CaseCard = ({ caseItem }) => {
-  const { spinRoulette } = useApp();
+  const { openCase } = useApp();
 
   const handleOpenCase = () => {
-    spinRoulette(caseItem.id, false);
+    openCase(caseItem.id, false);
   };
 
   return (

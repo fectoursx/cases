@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 import { FaTimes } from 'react-icons/fa';
 import { useApp } from '../context/AppContext';
 import PrizeItem from './PrizeItem';
@@ -10,6 +10,9 @@ const Roulette = () => {
   const [demoMode, setDemoMode] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [winningItem, setWinningItem] = useState(null);
+  const [animationFinished, setAnimationFinished] = useState(false);
+  const [rouletteStopped, setRouletteStopped] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState(0);
   const rouletteRef = useRef(null);
   
   // Показываем модальное окно, когда есть текущий кейс
@@ -18,6 +21,8 @@ const Roulette = () => {
       setShowModal(true);
       setShowResult(false);
       setWinningItem(null);
+      setAnimationFinished(false);
+      setRouletteStopped(false);
     } else {
       setShowModal(false);
     }
@@ -25,33 +30,67 @@ const Roulette = () => {
 
   // Отслеживаем изменение состояния вращения и приза
   useEffect(() => {
-    if (!isSpinning && prize && !showResult) {
-      // Когда вращение остановилось и есть приз, показываем результат
+    if (!isSpinning && prize && !showResult && animationFinished) {
+      // Когда анимация полностью завершена, ждем еще намного больше для полной остановки
       setTimeout(() => {
-        setWinningItem(prize);
-        setShowResult(true);
-      }, 500);
+        setRouletteStopped(true);
+      }, 3000); // Увеличиваем до 3 секунд после окончания анимации
     }
-  }, [isSpinning, prize, showResult]);
+  }, [isSpinning, prize, showResult, animationFinished]);
+
+  // Показываем результат только после полной остановки рулетки
+  useEffect(() => {
+    if (rouletteStopped && prize && !showResult) {
+      // Определяем приз по позиции курсора
+      const itemWidth = 100; // Примерная ширина элемента в процентах
+      const totalItems = currentCase.items.length;
+      const finalPosition = cursorPosition % (totalItems * itemWidth);
+      const itemIndex = Math.floor(finalPosition / itemWidth) % totalItems;
+      const actualWinningItem = currentCase.items[itemIndex];
+      
+      setTimeout(() => {
+        setWinningItem(actualWinningItem);
+        setShowResult(true);
+        
+        // Добавляем приз в инвентарь пользователя (если не демо-режим)
+        if (!demoMode && actualWinningItem) {
+          // Здесь можно добавить логику для обновления инвентаря пользователя
+          console.log('Выигран приз:', actualWinningItem);
+        }
+      }, 4000); // Увеличиваем задержку до 4 секунд для просмотра результата
+    }
+  }, [rouletteStopped, prize, showResult, cursorPosition, currentCase, demoMode]);
+
+  // Сбрасываем флаги при начале нового спина
+  useEffect(() => {
+    if (isSpinning) {
+      setAnimationFinished(false);
+      setRouletteStopped(false);
+    }
+  }, [isSpinning]);
 
   // Анимация для рулетки
   const rouletteAnimation = useSpring({
     from: { transform: 'translateX(0%)' },
     to: { 
       transform: isSpinning 
-        ? 'translateX(-2000%)' // Длинная прокрутка для эффекта
+        ? 'translateX(-4000%)' // Увеличиваем дистанцию для более длинной прокрутки
         : 'translateX(0%)' 
     },
     config: { 
-      duration: isSpinning ? 5000 : 0,
-      tension: 120,
-      friction: 14
+      duration: isSpinning ? 8000 : 0, // Увеличиваем время до 8 секунд
+      tension: 60, // Уменьшаем напряжение для более плавного замедления
+      friction: 25 // Увеличиваем трение для более реалистичного замедления
     },
     reset: !isSpinning,
     onRest: () => {
-      // Когда анимация завершена, можно выполнить дополнительные действия
+      // Когда анимация завершена, устанавливаем финальную позицию курсора
       if (isSpinning) {
         console.log('Анимация завершена');
+        setAnimationFinished(true);
+        // Рассчитываем финальную позицию курсора
+        const finalPosition = 4000; // Позиция после прокрутки
+        setCursorPosition(finalPosition);
       }
     }
   });
@@ -61,6 +100,8 @@ const Roulette = () => {
     setShowModal(false);
     setShowResult(false);
     setWinningItem(null);
+    setAnimationFinished(false);
+    setRouletteStopped(false);
   };
 
   // Обработчик для переключения режима (реальный/демо)
@@ -107,7 +148,7 @@ const Roulette = () => {
                   ref={rouletteRef}
                 >
                   {/* Дублируем предметы много раз для создания эффекта бесконечной прокрутки */}
-                  {Array(20).fill().map((_, arrayIndex) => (
+                  {Array(40).fill().map((_, arrayIndex) => (
                     currentCase.items.map((item, itemIndex) => (
                       <PrizeItem 
                         key={`${item.id}-${arrayIndex}-${itemIndex}`} 
