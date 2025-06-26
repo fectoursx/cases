@@ -1,9 +1,7 @@
 import React from 'react';
-import { ArrowLeft, Wallet, Package } from 'lucide-react';
 import { useUserStore } from '@/store/userStore';
 import { useUIStore } from '@/store/uiStore';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import styles from './ProfilePage.module.css';
 
 export const ProfilePage: React.FC = () => {

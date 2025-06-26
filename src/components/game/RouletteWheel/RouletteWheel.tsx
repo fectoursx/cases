@@ -2,10 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { useGameStore } from '@/store/gameStore';
 import { useUserStore } from '@/store/userStore';
-import { PrizeCard } from '../PrizeCard';
-import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
-import { Loader } from '@/components/ui/Loader';
 import styles from './RouletteWheel.module.css';
 
 const MULTIPLIERS = [

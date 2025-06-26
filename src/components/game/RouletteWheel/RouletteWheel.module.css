@@ -66,9 +66,11 @@
   align-items: center;
   height: 100%;
   position: absolute;
+  top: 50%;
   left: 0;
   transform: translateY(-50%);
   gap: 8px;
+  padding-left: 50%;
   will-change: transform;
 }
 

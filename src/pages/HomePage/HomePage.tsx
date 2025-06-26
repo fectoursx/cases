@@ -1,5 +1,4 @@
 import React from 'react';
-import { AlertTriangle } from 'lucide-react';
 import { useCasesStore } from '@/store/casesStore';
 import { Header } from '@/components/layout/Header';
 import { LiveStatusBar } from '@/components/layout/LiveStatusBar';

@@ -15,7 +15,7 @@ const navigationTabs: NavigationTab[] = [
   { id: 'profile', label: 'Profile', icon: 'profile' },
 ];
 
-const renderIcon = (iconType: string, isActive: boolean) => {
+const renderIcon = (iconType: string) => {
   switch (iconType) {
     case 'main':
       return (
@@ -51,7 +51,7 @@ export const BottomNavigation: React.FC = () => {
           onClick={() => setActivePage(tab.id as any)}
         >
           <div className={styles.footerIcon}>
-            {renderIcon(tab.icon, activePage === tab.id)}
+            {renderIcon(tab.icon)}
           </div>
           <div className={styles.footerLabel}>{tab.label}</div>
         </div>
