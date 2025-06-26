@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useUIStore } from '@/store/uiStore';
+import { useTelegramWebApp } from '@/hooks/useTelegramWebApp';
 import { HomePage } from '@/pages/HomePage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { BottomNavigation } from '@/components/layout/BottomNavigation';
@@ -8,15 +9,15 @@ import './App.css';
 
 const AppContent: React.FC = () => {
   const { activePage } = useUIStore();
+  const { webApp, isExpanded, isAvailable } = useTelegramWebApp();
 
   useEffect(() => {
-    // Инициализация Telegram WebApp
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.MainButton.setText('Открыть кейс');
-      window.Telegram.WebApp.MainButton.show();
+    // Дополнительная настройка Telegram WebApp
+    if (webApp) {
+      webApp.MainButton.setText('Открыть кейс');
+      webApp.MainButton.show();
     }
-  }, []);
+  }, [webApp]);
 
   const renderPage = () => {
     switch (activePage) {
@@ -36,7 +37,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isAvailable ? 'tg-viewport' : ''} ${isExpanded ? 'tg-expanded' : ''}`}>
       {renderPage()}
       <BottomNavigation />
     </div>

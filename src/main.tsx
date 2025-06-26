@@ -10,6 +10,14 @@ declare global {
     Telegram?: {
       WebApp: {
         ready(): void;
+        expand(): void;
+        isExpanded: boolean;
+        viewportHeight: number;
+        viewportStableHeight: number;
+        setHeaderColor(color: string): void;
+        setBackgroundColor(color: string): void;
+        enableClosingConfirmation(): void;
+        disableClosingConfirmation(): void;
         MainButton: {
           setText(text: string): void;
           show(): void;
@@ -18,6 +26,24 @@ declare global {
       };
     };
   }
+}
+
+// Инициализация Telegram Web App
+if (window.Telegram?.WebApp) {
+  const tg = window.Telegram.WebApp;
+  
+  // Готовность приложения
+  tg.ready();
+  
+  // Разворачиваем приложение на весь экран
+  tg.expand();
+  
+  // Настраиваем цвета интерфейса
+  tg.setHeaderColor('#141415');
+  tg.setBackgroundColor('#141415');
+  
+  // Отключаем подтверждение закрытия для лучшего UX
+  tg.disableClosingConfirmation();
 }
 
 const root = ReactDOM.createRoot(
