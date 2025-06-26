@@ -144,9 +144,6 @@ body {
   justify-content: center;
   min-height: 100vh;
   background: var(--gradient-primary);
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
 }
 
 /* Обработка ошибок */
@@ -1298,6 +1295,8 @@ body {
   z-index: 10;
   max-width: 90vw;
 }
+
+
 .footer-tab {
   flex: 1 1 0;
   display: flex;
@@ -1355,6 +1354,8 @@ body {
 .footer-tab:active {
   transform: scale(0.96);
 }
+
+
 @media (max-width: 480px) {
   .footer-menu {
     width: 98vw;

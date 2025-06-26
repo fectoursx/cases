@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from './App.tsx';
+import { Loader } from '@/components/ui/Loader';
 import './index.css';
 
 // Расширяем глобальный Window для Telegram WebApp
@@ -25,6 +26,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={<div className="app-loading"><Loader text="Loading application..." size="lg" /></div>}>
+      <App />
+    </Suspense>
   </React.StrictMode>
 ); 

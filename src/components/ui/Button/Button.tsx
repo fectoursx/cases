@@ -1,6 +1,7 @@
 import React from 'react';
 import { clsx } from 'clsx';
 import { ButtonProps } from '@/types/ui';
+import { Loader } from '@/components/ui/Loader';
 import styles from './Button.module.css';
 
 export const Button: React.FC<ButtonProps> = ({
@@ -28,9 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || loading}
     >
       {loading ? (
-        <div className={styles.spinner}>
-          <div className={styles.spinnerIcon}></div>
-        </div>
+        <Loader text="" size="sm" className={styles.buttonLoader} />
       ) : (
         children
       )}

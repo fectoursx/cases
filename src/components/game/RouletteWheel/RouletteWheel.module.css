@@ -1,104 +1,216 @@
 .rouletteContainer {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  width: 100%;
+  position: relative;
 }
 
 .rouletteViewport {
   position: relative;
+  width: 100%;
   height: 140px;
   overflow: hidden;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  border: 2px solid #dee2e6;
+  border-radius: var(--radius-md);
+  margin: 16px 0;
 }
 
-.rouletteMarker {
+/* Градиентные тени по бокам */
+.rouletteViewport::before {
+  content: '';
+  background: linear-gradient(90deg, rgba(20, 20, 21, 1) 18.77%, rgba(20, 20, 21, 0) 100%);
+  width: 48px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 2;
+}
+
+/* Центральный курсор */
+.rouletteViewport::after {
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 4px;
-  height: 80px;
-  background: #dc3545;
-  z-index: 10;
+  height: 140px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #0075FF 15%,
+    #0075FF 85%,
+    transparent 100%
+  );
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+  z-index: 10;
+  box-shadow: 
+    0 0 20px rgba(0, 117, 255, 0.8),
+    0 0 40px rgba(0, 117, 255, 0.4);
+  filter: drop-shadow(0 0 5px rgba(0, 117, 255, 0.6));
 }
 
-.rouletteMarker::before {
-  content: '';
+.shadowRight {
+  background: linear-gradient(-90deg, rgba(20, 20, 21, 1) 18.77%, rgba(20, 20, 21, 0) 100%);
+  width: 48px;
   position: absolute;
-  top: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 8px solid #dc3545;
-}
-
-.rouletteMarker::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid #dc3545;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 2;
 }
 
 .rouletteItems {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 20px 0;
-  gap: 16px;
-  padding-left: 50%;
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  gap: 8px;
+  will-change: transform;
 }
 
 .rouletteItem {
-  min-width: 120px !important;
   flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  position: relative;
+  transition: all 0.2s ease;
 }
 
-.modeSelector {
+.rouletteItem:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+}
+
+.rouletteItem img {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-md);
+
+  object-fit: contain;
+}
+
+.prizeHint {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: white;
+  z-index: 2;
+}
+
+.prizeHint .coinIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.multiplierTabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.multiplierTab {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.multiplierTab.active {
+  background: rgba(0, 117, 255, 0.2);
+  border-color: rgba(0, 117, 255, 0.4);
+  color: white;
+}
+
+.multiplierTab.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.actionButtons {
   display: flex;
   gap: 12px;
-  justify-content: center;
-}
-
-.insufficientFunds {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.infoMessage {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #856404;
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 14px;
-}
-
-.infoIcon {
-  font-weight: bold;
-  color: #856404;
+  transition: margin-top 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .spinButton {
-  width: 100%;
-  margin-top: 8px;
+  flex: 1;
+  background: linear-gradient(135deg, rgba(0, 117, 255, 0.8), rgba(0, 117, 255, 1));
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spinButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(0, 117, 255, 1), rgba(0, 140, 255, 1));
+  transform: translateY(-1px);
+}
+
+.spinButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.quickSpinButton {
+  background: linear-gradient(135deg, rgba(80, 222, 37, 0.8), rgba(80, 222, 37, 1));
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quickSpinButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(80, 222, 37, 1), rgba(100, 242, 57, 1));
+  transform: translateY(-1px);
+}
+
+.quickSpinButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .resultContainer {
@@ -107,19 +219,21 @@
   align-items: center;
   gap: 24px;
   text-align: center;
+  padding: 20px;
 }
 
 .resultTitle {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
-  color: #28a745;
+  color: #ffffff;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .resultPrize {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .winningPrize {
@@ -127,11 +241,151 @@
   animation: prizeGlow 2s ease-in-out infinite alternate;
 }
 
+.resultActions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.keepButton {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(0, 117, 255, 0.8), rgba(0, 117, 255, 1));
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px 24px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quickSellButton {
+  background: linear-gradient(135deg, rgba(80, 222, 37, 0.8), rgba(80, 222, 37, 1));
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.upgradeButton {
+  background: #FF8400;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.prizesSection {
+  margin-top: 20px;
+}
+
+.prizesTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.prizesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.prizeGridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prizeGridItem img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.prizePrice {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 @keyframes prizeGlow {
-  from {
-    box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3);
+  0%, 100% {
+    filter: drop-shadow(0 4px 12px rgba(0, 117, 255, 0.3));
   }
-  to {
-    box-shadow: 0 8px 32px rgba(40, 167, 69, 0.5);
+  50% {
+    filter: drop-shadow(0 4px 20px rgba(0, 117, 255, 0.6));
   }
-} 
+}
+
+/* Scrollbar styles */
+.prizesGrid::-webkit-scrollbar {
+  width: 4px;
+}
+
+.prizesGrid::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.prizesGrid::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.prizesGrid::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .rouletteViewport {
+    height: 140px;
+    margin: 12px 0;
+  }
+  
+  .rouletteItem {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+  }
+  
+  .resultActions {
+    flex-direction: column;
+  }
+  
+  .prizesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+ 

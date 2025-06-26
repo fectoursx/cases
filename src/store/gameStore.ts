@@ -12,7 +12,7 @@ interface GameState {
 interface GameActions {
   openCase: (caseData: Case, isDemo: boolean) => void;
   closeCase: () => void;
-  startSpin: () => void;
+  startSpin: (finalPosition?: number) => void;
   finishSpin: (result: SpinResult) => void;
   showSpinResult: () => void;
   resetGame: () => void;
@@ -51,7 +51,7 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
     });
   },
 
-  startSpin: () => {
+  startSpin: (winningIndex) => {
     const { currentCase } = get();
     if (!currentCase) return;
 
@@ -59,12 +59,22 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
 
     // Симуляция спина с задержкой
     setTimeout(() => {
-      const randomIndex = Math.floor(Math.random() * currentCase.items.length);
-      const winningPrize = currentCase.items[randomIndex];
+      let winningPrize;
+      let selectedIndex;
+      
+      if (winningIndex !== undefined) {
+        // Определяем приз по переданному индексу
+        selectedIndex = winningIndex;
+        winningPrize = currentCase.items[selectedIndex];
+      } else {
+        // Случайный выбор (для обратной совместимости)
+        selectedIndex = Math.floor(Math.random() * currentCase.items.length);
+        winningPrize = currentCase.items[selectedIndex];
+      }
       
       const result: SpinResult = {
         prize: winningPrize,
-        position: randomIndex,
+        position: selectedIndex,
         timestamp: Date.now()
       };
 
@@ -80,8 +90,8 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
       // Показываем результат через небольшую задержку
       setTimeout(() => {
         set({ showResult: true });
-      }, 1000);
-    }, 8000);
+      }, 500);
+    }, 4000);
   },
 
   finishSpin: (result) => {

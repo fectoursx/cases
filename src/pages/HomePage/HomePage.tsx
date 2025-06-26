@@ -6,6 +6,7 @@ import { LiveStatusBar } from '@/components/layout/LiveStatusBar';
 import { CaseCard } from '@/components/game/CaseCard';
 import { RouletteWheel } from '@/components/game/RouletteWheel';
 import { Button } from '@/components/ui/Button';
+import { Loader } from '@/components/ui/Loader';
 import styles from './HomePage.module.css';
 
 export const HomePage: React.FC = () => {
@@ -15,7 +16,9 @@ export const HomePage: React.FC = () => {
     return (
       <div className={styles.homePage}>
         <Header />
-        <div className={styles.loading}>Загрузка...</div>
+        <div className={styles.loading}>
+          <Loader text="Loading cases..." size="lg" />
+        </div>
       </div>
     );
   }
@@ -52,7 +55,7 @@ export const HomePage: React.FC = () => {
             ))
           ) : (
             <div className={styles.noCases}>
-              Кейсы загружаются...
+              <Loader text="Loading cases..." size="md" />
             </div>
           )}
         </div>

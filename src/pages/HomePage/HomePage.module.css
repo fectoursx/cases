@@ -164,9 +164,7 @@
 
 /* Адаптивность */
 @media (max-width: 768px) {
-  .casesContainer {
-    padding: 16px;
-  }
+
   
   .casesGrid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
