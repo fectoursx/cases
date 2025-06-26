@@ -11,13 +11,7 @@ const AppContent: React.FC = () => {
   const { activePage } = useUIStore();
   const { webApp, isExpanded, isAvailable } = useTelegramWebApp();
 
-  useEffect(() => {
-    // Дополнительная настройка Telegram WebApp
-    if (webApp) {
-      webApp.MainButton.setText('Открыть кейс');
-      webApp.MainButton.show();
-    }
-  }, [webApp]);
+  useEffect(() => {  }, [webApp]);
 
   const renderPage = () => {
     switch (activePage) {
