@@ -2,6 +2,91 @@
 @import './styles/globals.css';
 @import './styles/animations.css';
 
+/* Import Tailwind CSS */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Application-wide styles using centralized theme */
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset and base styles are now in globals.css */
+
+/* Utility classes using theme variables */
+.text-brand {
+  color: var(--color-brand-primary);
+}
+
+.text-success {
+  color: var(--color-brand-success);
+}
+
+.text-warning {
+  color: var(--color-brand-warning);
+}
+
+.text-error {
+  color: var(--color-brand-error);
+}
+
+.bg-brand {
+  background: var(--color-brand-primary);
+}
+
+.bg-gradient-brand {
+  background: var(--gradient-brand);
+}
+
+.bg-card {
+  background: var(--color-background-card);
+}
+
+.border-theme {
+  border-color: var(--color-background-border);
+}
+
+.shadow-theme {
+  box-shadow: var(--shadow-md);
+}
+
+.rounded-theme {
+  border-radius: var(--radius-md);
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 /* Дополнительные глобальные стили для приложения */
 #root {
   width: 100%;

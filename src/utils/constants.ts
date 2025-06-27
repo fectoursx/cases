@@ -1,4 +1,5 @@
 // Константы приложения
+import { THEME } from './theme';
 
 export const APP_CONFIG = {
   name: 'Cases Frontend',
@@ -23,13 +24,6 @@ export const UI_CONFIG = {
   }
 } as const;
 
-export const RARITY_COLORS = {
-  common: '#9ca3af',
-  rare: '#3b82f6',
-  epic: '#8b5cf6',
-  legendary: '#f59e0b'
-} as const;
-
 export const TOKEN_SYMBOL = 'T';
 
 export const ROUTES = {
@@ -39,4 +33,9 @@ export const ROUTES = {
   weekly: '/weekly',
   jackpot: '/jackpot',
   upgrade: '/upgrade'
-} as const; 
+} as const;
+
+// Re-export theme-related constants for easier access
+export const RARITY_COLORS = THEME.colors.rarity;
+export const BRAND_COLORS = THEME.colors.brand;
+export const GRADIENTS = THEME.colors.gradients; 
