@@ -1,172 +1,146 @@
-# Cases Frontend
+# 🎰 Cases Frontend
 
-A modern case opening application built with React, TypeScript, and Vite.
+Фронтенд приложение для кейсов с рулеткой, построенное на React + TypeScript + Zustand.
 
-## 🚀 Features
-
-- **Modern Architecture**: Built with React 18, TypeScript, and Vite
-- **Centralized Theme System**: All colors and design tokens in one place
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Telegram Web App Integration**: Native Telegram bot experience
-- **Type Safety**: Full TypeScript support
-- **Performance Optimized**: Tree-shaking, code splitting, and optimized builds
-
-## 🎨 Theme System
-
-The application uses a centralized theme system located in `src/utils/theme.ts`:
-
-```typescript
-import { THEME, getColor, getSpacing } from '@/utils/theme';
-
-// Use theme colors
-const primaryColor = getColor('brand.primary');
-const spacing = getSpacing('lg');
-```
-
-### Available Theme Variables
-
-- **Colors**: Background, text, brand, rarity colors
-- **Spacing**: Consistent spacing scale (xs, sm, md, lg, xl, etc.)
-- **Typography**: Font sizes, weights, and line heights
-- **Shadows**: Box shadow utilities
-- **Gradients**: Pre-defined gradient combinations
-- **Transitions**: Consistent animation timing
-
-## 📁 Project Structure
-
-```
-src/
-├── components/          # Reusable UI components
-│   ├── game/           # Game-specific components
-│   ├── layout/         # Layout components
-│   └── ui/             # Generic UI components
-├── pages/              # Page components
-├── store/              # State management (Zustand)
-├── styles/             # Global styles and theme
-├── types/              # TypeScript type definitions
-├── utils/              # Utility functions and constants
-└── hooks/              # Custom React hooks
-```
-
-## 🔧 Development
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm (recommended) or npm
-
-### Installation
+## 🚀 Быстрый старт
 
 ```bash
-# Install dependencies
+# Установка зависимостей
 pnpm install
 
-# Start development server
+# Запуск в режиме разработки
 pnpm dev
 
-# Build for production
+# Сборка для продакшена
 pnpm build
 
-# Preview production build
+# Предварительный просмотр сборки
 pnpm preview
 ```
 
-### Code Quality
+## 📁 Структура проекта
 
-```bash
-# Lint code
-pnpm lint
-
-# Format code
-pnpm format
-
-# Type checking
-pnpm type-check
+```
+src/
+├── components/          # Компоненты
+│   ├── ui/             # Базовые UI компоненты
+│   ├── layout/         # Компоненты макета
+│   └── game/           # Игровые компоненты
+├── pages/              # Страницы приложения
+├── store/              # Zustand stores
+├── types/              # TypeScript типы
+├── styles/             # Глобальные стили
+└── utils/              # Утилиты
 ```
 
-## 🎯 Recent Refactoring
+## 🎯 Основные возможности
 
-This project has been recently refactored to improve maintainability and performance:
+- **TypeScript** - строгая типизация
+- **CSS Modules** - изолированные стили
+- **Zustand** - легковесный state management
+- **React Spring** - плавные анимации
+- **Telegram WebApp** - интеграция с Telegram
 
-### ✅ Completed
-
-- **Removed Duplicate Components**: Eliminated JSX duplicates in favor of TypeScript versions
-- **Centralized Theme System**: All colors and design tokens moved to `src/utils/theme.ts`
-- **Updated CSS Variables**: Consistent variable naming and usage across all components
-- **Cleaned Dependencies**: Removed unused files and imports
-- **Improved Type Safety**: Enhanced TypeScript coverage
-
-### 🗑️ Removed Files
-
-- `src/components/Roulette.jsx` → Replaced by `RouletteWheel.tsx`
-- `src/components/CaseCard.jsx` → Replaced by `game/CaseCard.tsx`
-- `src/pages/Home.jsx` → Replaced by `HomePage.tsx`
-- `src/components/Header.jsx` → Replaced by `layout/Header.tsx`
-- Old JSX components (`Balance.jsx`, `UserInfo.jsx`, etc.)
-
-### 🎨 Theme Migration
-
-Colors are now centrally managed and can be accessed via:
-
-```css
-/* CSS Variables */
-color: var(--color-brand-primary);
-background: var(--gradient-brand);
-
-/* Theme Functions in TypeScript */
-import { THEME } from '@/utils/theme';
-const color = THEME.colors.brand.primary;
-```
-
-## 🧩 Component Architecture
+## 🎮 Компоненты
 
 ### UI Components
-
-- **Button**: Flexible button component with multiple variants
-- **Card**: Container component with hover effects
-- **Modal**: Responsive modal with keyboard shortcuts
-- **Loader**: Loading indicators with different sizes
+- `Button` - кнопки с разными вариантами
+- `Card` - карточки контента
+- `Modal` - модальные окна
 
 ### Game Components
-
-- **CaseCard**: Interactive case selection cards
-- **RouletteWheel**: Animated roulette for case opening
-- **PrizeCard**: Prize display with rarity colors
+- `CaseCard` - карточка кейса
+- `RouletteWheel` - рулетка для розыгрыша
+- `PrizeCard` - карточка приза
 
 ### Layout Components
+- `Header` - шапка приложения
+- `Navigation` - навигация
 
-- **Header**: Top navigation and user info
-- **BottomNavigation**: Mobile-friendly navigation
-- **LiveStatusBar**: Real-time activity display
+## 🎨 Стили
 
-## 🚀 Deployment
+Проект использует CSS Modules для изолированных стилей компонентов и глобальные CSS переменные для консистентности дизайна.
 
-The application is optimized for deployment on modern hosting platforms:
-
-```bash
-# Build for production
-pnpm build
-
-# The dist/ folder contains the production build
+### CSS переменные
+```css
+--primary-color: #667eea
+--secondary-color: #764ba2
+--gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
 ```
 
-## 📱 Telegram Integration
+## 🏪 Store Management
 
-The app integrates with Telegram Web App API:
+Используется Zustand для управления состоянием:
 
-- Automatic theme detection
-- Viewport management
-- Native navigation feel
-- Haptic feedback support
+- `userStore` - данные пользователя и инвентарь
+- `gameStore` - игровая логика
+- `casesStore` - данные кейсов
+- `uiStore` - состояние UI
 
-## 🤝 Contributing
+## 🎰 Игровая механика
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes following the coding standards
-4. Test your changes
-5. Submit a pull request
+1. Пользователь выбирает кейс
+2. Проверяется баланс
+3. Запускается анимация рулетки
+4. Определяется выигрышный приз
+5. Приз добавляется в инвентарь
 
-## 📄 License
+## 📱 Telegram WebApp
 
-This project is licensed under the MIT License. 
+Приложение интегрировано с Telegram WebApp API для:
+- Получения данных пользователя
+- Управления основной кнопкой
+- Адаптации к теме Telegram
+
+## 🛠 Разработка
+
+### Добавление нового компонента
+
+```bash
+# Создайте папку компонента
+mkdir src/components/ui/NewComponent
+
+# Создайте файлы
+touch src/components/ui/NewComponent/NewComponent.tsx
+touch src/components/ui/NewComponent/NewComponent.module.css
+touch src/components/ui/NewComponent/index.ts
+```
+
+### Структура компонента
+
+```tsx
+// NewComponent.tsx
+import React from 'react';
+import styles from './NewComponent.module.css';
+
+interface NewComponentProps {
+  // props here
+}
+
+export const NewComponent: React.FC<NewComponentProps> = (props) => {
+  return (
+    <div className={styles.container}>
+      {/* component content */}
+    </div>
+  );
+};
+```
+
+## 📋 Скрипты
+
+- `pnpm dev` - запуск dev сервера
+- `pnpm build` - сборка для продакшена
+- `pnpm preview` - предпросмотр сборки
+- `pnpm lint` - проверка кода
+- `pnpm type-check` - проверка типов
+
+## 🤝 Вклад в проект
+
+1. Форкните репозиторий
+2. Создайте ветку для фичи
+3. Внесите изменения
+4. Создайте Pull Request
+
+## 📄 Лицензия
+
+MIT License 

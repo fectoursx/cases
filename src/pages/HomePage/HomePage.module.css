@@ -1,5 +1,6 @@
 .homePage {
   min-height: 100vh;
+  padding-bottom: 85px;
   background: var(--color-background);
 }
 
@@ -32,11 +33,6 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.liveDot {
-  color: var(--color-live);
-  font-size: 20px;
-  animation: pulse 2s ease-in-out infinite;
-}
 
 @keyframes pulse {
   0%, 100% {
@@ -93,7 +89,7 @@
 .freeCaseBanner {
   background: linear-gradient(135deg, #0090FF 0%, #00C9FF 100%);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-16);
+  padding: var(--spacing-12);
   margin-bottom: var(--spacing-16);
   display: flex;
   align-items: center;
@@ -148,7 +144,7 @@
 
 .casesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -163,17 +159,46 @@
 }
 
 /* Адаптивность */
-@media (max-width: 768px) {
-
-  
+/* Очень маленькие экраны - минимум 2 элемента */
+@media (max-width: 380px) {
   .casesGrid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
-  .newsBanner {
-    flex-direction: column;
-    text-align: center;
+  .casesContainer {
+    padding: 12px;
+  }
+}
+
+/* Маленькие экраны */
+@media (min-width: 381px) and (max-width: 480px) {
+  .casesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Средние экраны */
+@media (min-width: 481px) and (max-width: 768px) {
+  .casesGrid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+  }
+}
+
+/* Большие экраны */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .casesGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+}
+
+/* Очень большие экраны */
+@media (min-width: 1025px) {
+  .casesGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
   }
 } 

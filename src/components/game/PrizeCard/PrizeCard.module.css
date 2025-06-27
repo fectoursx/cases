@@ -79,18 +79,14 @@
   background: linear-gradient(145deg, #ffffff, #fefbf0);
   position: relative;
 }
-
 .legendary::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #f59e0b, #d97706, #f59e0b);
-  border-radius: 10px;
+  inset: -2px;
+  background: linear-gradient(45deg, #f59e0b, #d97706);
+  animation: legendaryGlow 2s infinite;
+  border-radius: inherit;
   z-index: -1;
-  animation: legendaryGlow 2s ease-in-out infinite alternate;
 }
 
 @keyframes legendaryGlow {

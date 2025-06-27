@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { Case, GameSession, SpinResult } from '@/types/game';
+import { RouletteService } from '@/services/RouletteService';
+import { ROULETTE_CONFIG } from '@/types/game';
 
 interface GameState {
   currentCase: Case | null;
@@ -68,15 +70,11 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
         winningPrize = currentCase.items[selectedIndex];
       } else {
         // Случайный выбор (для обратной совместимости)
-        selectedIndex = Math.floor(Math.random() * currentCase.items.length);
+        selectedIndex = RouletteService.generateWinningIndex(currentCase.items.length);
         winningPrize = currentCase.items[selectedIndex];
       }
       
-      const result: SpinResult = {
-        prize: winningPrize,
-        position: selectedIndex,
-        timestamp: Date.now()
-      };
+      const result = RouletteService.createSpinResult(currentCase, selectedIndex);
 
       set((state) => ({
         isSpinning: false,
@@ -90,8 +88,8 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
       // Показываем результат через небольшую задержку
       setTimeout(() => {
         set({ showResult: true });
-      }, 500);
-    }, 4000);
+      }, ROULETTE_CONFIG.RESULT_DELAY);
+    }, ROULETTE_CONFIG.SPIN_DURATION);
   },
 
   finishSpin: (result) => {

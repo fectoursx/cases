@@ -18,7 +18,7 @@ interface UserActions {
 }
 
 const initialUser: User = {
-  id: '#718903327',
+  id: '718903327',
   name: 'Dmitry',
   avatar: '/assets/images/avatar.png',
   balance: 100.00,

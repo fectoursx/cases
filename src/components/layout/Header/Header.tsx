@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useUserStore } from '@/store/userStore';
 import { useUIStore } from '@/store/uiStore';
+import { ASSET_PATHS } from '@/utils/constants';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
@@ -16,7 +17,7 @@ export const Header: React.FC = () => {
     <header className={styles.userHeader}>
       <div className={styles.userHeaderRow}>
         <div className={styles.profile} onClick={handleProfileClick}>
-          <img src={user.avatar} alt="User Avatar" className={styles.avatar} />
+          <img src={ASSET_PATHS.IMAGES.AVATAR} alt="User Avatar" className={styles.avatar} />
           <div className={styles.profileInfo}>
             <div className={styles.profileName}>{user.name}</div>
           </div>

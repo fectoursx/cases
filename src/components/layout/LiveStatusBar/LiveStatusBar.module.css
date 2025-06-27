@@ -23,7 +23,6 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
-  background: var(--color-background);
   border-radius: var(--radius-md);
   padding: var(--spacing-8) var(--spacing-12);
 }
@@ -32,22 +31,19 @@
   color: var(--color-live, #23c265);
   font-size: 12px;
   font-weight: var(--font-weight-semibold);
-  margin-bottom: 2px;
+  height: 10px;
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0% {
     opacity: 1;
-    transform: scale(1);
   }
   50% {
     opacity: 0.6;
-    transform: scale(1.2);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -58,6 +54,7 @@
   font-weight: var(--font-weight-semibold);
   writing-mode: vertical-lr;
   transform: rotate(180deg);
+  margin-bottom: 8px;
   letter-spacing: 0.5px;
 }
 
@@ -68,7 +65,7 @@
   gap: 3px;
   align-items: center;
   flex: 1;
-  margin-left: 80px;
+  margin-left: 40px;
   overflow: hidden;
   padding: var(--spacing-8);
 }
@@ -132,6 +129,6 @@
   }
   
   .liveItems {
-    margin-left: 70px;
+    margin-left: 40px;
   }
 } 

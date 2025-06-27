@@ -1,95 +1,68 @@
-/* 
- * Centralized CSS Variables
- * This file is now generated from src/utils/theme.ts
- * All colors and design tokens are centralized there
- */
-
+/* CSS переменные для цветов и размеров */
 :root {
-  /* Background colors */
-  --color-background-primary: #141415;
-  --color-background-secondary: #1a1a1b;
-  --color-background-card: #2a2a2a;
-  --color-background-modal: rgba(0, 0, 0, 0.8);
-  --color-background-overlay: rgba(255, 255, 255, 0.05);
-  --color-background-border: rgba(255, 255, 255, 0.1);
-  --color-background-hint: rgba(163, 171, 187, 0.12);
-  
-  /* Text colors */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #F0F2F5;
-  --color-text-muted: rgba(255, 255, 255, 0.7);
-  --color-text-accent: #0075FF;
-  
-  /* Brand colors */
-  --color-brand-primary: #0075FF;
-  --color-brand-secondary: #00C9FF;
-  --color-brand-success: #22c55e;
-  --color-brand-warning: #f59e0b;
-  --color-brand-error: #ef4444;
-  --color-brand-live: #23C265;
-  
-  /* Rarity colors */
-  --color-rarity-common: #9ca3af;
-  --color-rarity-uncommon: #22c55e;
-  --color-rarity-rare: #3b82f6;
-  --color-rarity-epic: #8b5cf6;
-  --color-rarity-legendary: #f59e0b;
-  --color-rarity-mythic: #ef4444;
-  
-  /* Gradients */
+  /* Основные цвета */
+  --primary-50: #f0f4ff;
+  --primary-100: #e0eaff;
+  --primary-200: #c7d7fe;
+  --primary-300: #a5b8fc;
+  --primary-400: #8b92f7;
+  --primary-500: #667eea;
+  --primary-600: #5a67d8;
+  --primary-700: #4c51bf;
+  --primary-800: #434190;
+  --primary-900: #3c366b;
+
+  /* Темные цвета для темы */
+  --color-background: #141415;
+  --color-text: #ffffff;
+  --color-live: #00ff00;
+
+  /* Градиенты */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-success: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-  --gradient-brand: linear-gradient(135deg, #0090FF 0%, #00C9FF 100%);
-  --gradient-blue: linear-gradient(135deg, rgba(0, 117, 255, 0.8), rgba(0, 117, 255, 1));
-  --gradient-green: linear-gradient(135deg, rgba(80, 222, 37, 0.8), rgba(80, 222, 37, 1));
-  
-  /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  --spacing-3xl: 32px;
-  --spacing-4xl: 48px;
-  
-  /* Border radius */
+
+  /* Размеры */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --radius-round: 9999px;
-  
-  /* Shadows */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+
+  /* Тени */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
   --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 20px rgba(0, 117, 255, 0.4);
-  
-  /* Typography */
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-md: 16px;
+
+  /* Отступы */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Шрифты */
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
   --font-size-lg: 18px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 24px;
-  
   --font-weight-normal: 400;
-  --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
-  /* Transitions */
+
+  /* Переходы */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
   --transition-slow: 0.4s ease;
-
-  /* Legacy support - these will be deprecated */
-  --color-background: var(--color-background-primary);
-  --color-text: var(--color-text-primary);
-  --color-live: var(--color-brand-live);
-  --color-border: var(--color-background-border);
-  --color-hint-bg: var(--color-background-hint);
 } 

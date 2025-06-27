@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUIStore } from '@/store/uiStore';
+import { ASSET_PATHS } from '@/utils/constants';
 import styles from './BottomNavigation.module.css';
 
 interface NavigationTab {
@@ -10,7 +11,7 @@ interface NavigationTab {
 
 const navigationTabs: NavigationTab[] = [
   { id: 'main', label: 'Main', icon: 'main' },
-  { id: 'weekly', label: 'Weekly', icon: 'weekly' },
+  { id: 'jackpot', label: 'JackPot', icon: 'jackpot' },
   { id: 'upgrade', label: 'Upgrade', icon: 'upgrade' },
   { id: 'profile', label: 'Profile', icon: 'profile' },
 ];
@@ -27,13 +28,13 @@ const renderIcon = (iconType: string) => {
         </div>
       );
     case 'weekly':
-      return <img src="/assets/images/lightning.svg" alt="Weekly" className={styles.iconImage} />;
+      return <img src={ASSET_PATHS.IMAGES.LIGHTNING} alt="Weekly" className={styles.iconImage} />;
     case 'jackpot':
-      return <img src="/assets/images/jackpot.svg" alt="JackPot" className={styles.iconImage} />;
+      return <img src={ASSET_PATHS.IMAGES.JACKPOT} alt="JackPot" className={styles.iconImage} />;
     case 'upgrade':
-      return <img src="/assets/images/upgrade.svg" alt="Upgrade" className={styles.iconImage} />;
+      return <img src={ASSET_PATHS.IMAGES.UPGRADE} alt="Upgrade" className={styles.iconImage} />;
     case 'profile':
-      return <img src="/assets/images/profile.svg" alt="Profile" className={styles.iconImage} />;
+      return <img src={ASSET_PATHS.IMAGES.PROFILE} alt="Profile" className={styles.iconImage} />;
     default:
       return null;
   }
@@ -42,13 +43,21 @@ const renderIcon = (iconType: string) => {
 export const BottomNavigation: React.FC = () => {
   const { activePage, setActivePage } = useUIStore();
 
+  const handleTabClick = (tab: NavigationTab) => {
+    if (tab.id === 'jackpot') {
+      window.open('https://youtube.com', '_blank', 'noopener,noreferrer');
+    } else {
+      setActivePage(tab.id as any);
+    }
+  };
+
   return (
     <nav className={styles.footerMenu}>
       {navigationTabs.map((tab) => (
         <div
           key={tab.id}
           className={`${styles.footerTab} ${activePage === tab.id ? styles.footerTabActive : ''}`}
-          onClick={() => setActivePage(tab.id as any)}
+          onClick={() => handleTabClick(tab)}
         >
           <div className={styles.footerIcon}>
             {renderIcon(tab.icon)}

@@ -6,6 +6,7 @@ import { CaseCard } from '@/components/game/CaseCard';
 import { RouletteWheel } from '@/components/game/RouletteWheel';
 import { Button } from '@/components/ui/Button';
 import { Loader } from '@/components/ui/Loader';
+import { ASSET_PATHS, MESSAGES } from '@/utils/constants';
 import styles from './HomePage.module.css';
 
 export const HomePage: React.FC = () => {
@@ -16,7 +17,7 @@ export const HomePage: React.FC = () => {
       <div className={styles.homePage}>
         <Header />
         <div className={styles.loading}>
-          <Loader text="Loading cases..." size="lg" />
+          <Loader text={MESSAGES.LOADING_CASES} size="lg" />
         </div>
       </div>
     );
@@ -33,16 +34,16 @@ export const HomePage: React.FC = () => {
         {/* Free case banner */}
         <div className={styles.freeCaseBanner}>
           <div className={styles.lightningIcon}>
-            <img src="/assets/images/lightning.svg" alt="Lightning" />
+            <img src={ASSET_PATHS.IMAGES.LIGHTNING} alt="Lightning" />
           </div>
           <div className={styles.bannerContent}>
             <div className={styles.coinWrapper}>
-              <img src="/assets/images/wizard-hat.png" alt="Coin" />
+              <img src={ASSET_PATHS.IMAGES.WIZARD_HAT} alt="Coin" />
             </div>
-            <div className={styles.bannerText}>Check our news</div>
+            <div className={styles.bannerText}>{MESSAGES.CHECK_NEWS}</div>
           </div>
           <Button size="sm" className={styles.telegramButton}>
-            Open @case
+            {MESSAGES.OPEN_CASE}
           </Button>
         </div>
         
@@ -54,7 +55,7 @@ export const HomePage: React.FC = () => {
             ))
           ) : (
             <div className={styles.noCases}>
-              <Loader text="Loading cases..." size="md" />
+              <Loader text={MESSAGES.LOADING_CASES} size="md" />
             </div>
           )}
         </div>

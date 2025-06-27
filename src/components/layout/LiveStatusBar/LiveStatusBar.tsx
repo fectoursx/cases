@@ -70,7 +70,7 @@ export const LiveStatusBar: React.FC = () => {
     <div className={styles.liveStatusBar}>
       <div className={styles.liveIndicator}>
         <div className={styles.liveDot}>●</div>
-        <div className={styles.liveText}>LIVE</div>
+        <div className={styles.liveText}>Live</div>
       </div>
       
       <div className={styles.liveItems}>
