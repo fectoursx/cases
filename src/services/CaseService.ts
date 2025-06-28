@@ -1,4 +1,4 @@
-import { Case, Prize } from '@/types/game';
+import { Case } from '@/types/game';
 import { CASE_GRADIENT_COLORS, PRICE_THRESHOLDS } from '@/utils/constants';
 
 export class CaseService {

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useGameStore } from '@/store/gameStore';
 import { useUserStore } from '@/store/userStore';
-import { Case } from '@/types/game';
+
 import { RouletteService } from '@/services/RouletteService';
 import { MULTIPLIERS } from '@/types/game';
 
@@ -21,7 +21,6 @@ export const useRoulette = () => {
   const handleSpin = useCallback(() => {
     if (!currentCase) return;
 
-    const totalPrice = RouletteService.calculateSpinCost(currentCase, selectedMultiplier);
     if (!RouletteService.canAffordSpin(currentCase, selectedMultiplier, user.balance)) {
       return;
     }
@@ -36,7 +35,6 @@ export const useRoulette = () => {
   const handleQuickSpin = useCallback(() => {
     if (!currentCase) return;
 
-    const totalPrice = RouletteService.calculateSpinCost(currentCase, selectedMultiplier);
     if (!RouletteService.canAffordSpin(currentCase, selectedMultiplier, user.balance)) {
       return;
     }

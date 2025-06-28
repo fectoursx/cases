@@ -61,17 +61,14 @@ export const useGameStore = create<GameState & GameActions>((set, get) => ({
 
     // Симуляция спина с задержкой
     setTimeout(() => {
-      let winningPrize;
       let selectedIndex;
       
       if (winningIndex !== undefined) {
         // Определяем приз по переданному индексу
         selectedIndex = winningIndex;
-        winningPrize = currentCase.items[selectedIndex];
       } else {
         // Случайный выбор (для обратной совместимости)
         selectedIndex = RouletteService.generateWinningIndex(currentCase.items.length);
-        winningPrize = currentCase.items[selectedIndex];
       }
       
       const result = RouletteService.createSpinResult(currentCase, selectedIndex);
