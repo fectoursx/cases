@@ -1,13 +1,24 @@
 .homePage {
   min-height: 100vh;
-  padding-bottom: 85px;
+      padding: 0 var(--spacing-8);
+    display: flex;
+        padding-bottom: 98px;
+    flex-direction: column;
+    gap: var(--spacing-10);
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
   background: var(--color-background);
 }
 
 .casesContainer {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
 }
 
 /* Live status bar */
@@ -87,13 +98,19 @@
 
 /* Free case banner */
 .freeCaseBanner {
-  background: linear-gradient(135deg, #0090FF 0%, #00C9FF 100%);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-12);
-  margin-bottom: var(--spacing-16);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
+    background: linear-gradient(115.39deg, #0098EA 0%, #3FBCFF 100%);
+    border-radius: 16px;
+    padding: 15px;
+    display: flex
+;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 0 20px #3fbcff59;
+    overflow: hidden;
+    margin-bottom: -10px;
+    width: 100%;
 }
 
 .lightningIcon {
@@ -110,10 +127,13 @@
 }
 
 .bannerContent {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-8);
-  flex: 1;
+    display: flex
+;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
 }
 
 .coinWrapper {
@@ -134,18 +154,31 @@
 }
 
 .telegramButton {
-  background: white;
-  color: #0090FF;
-  font-weight: var(--font-weight-semibold);
-  border: none;
-  padding: var(--spacing-8) var(--spacing-16);
-  border-radius: var(--radius-md);
+    background: #ffffff;
+    border-radius: 10px;
+    color: black;
+    padding: 8px 16px;
+    display: flex
+;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    min-width: 72px;
+    
+    max-height: 36px;
+    position: relative;
+    box-shadow: 0 0 50px #ffffff80;
+    border: none;
+    cursor: pointer;
 }
 
 .casesGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  width: 100%;
 }
 
 .loading,

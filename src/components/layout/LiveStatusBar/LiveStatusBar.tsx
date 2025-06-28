@@ -41,6 +41,20 @@ export const LiveStatusBar: React.FC = () => {
       name: 'Wizard Hat',
       price: 35.20,
       userName: 'MagicFan'
+    },
+    {
+      id: 5,
+      image: '/assets/images/wizard-hat.png',
+      name: 'Wizard Hat',
+      price: 35.20,
+      userName: 'MagicFan'
+    },
+    {
+      id: 6,
+      image: '/assets/images/dragon.png',
+      name: 'Dragon',
+      price: 89.99,
+      userName: 'CoolUser'
     }
   ];
 
