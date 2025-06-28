@@ -112,12 +112,6 @@
   }
 }
 
-@media (max-width: 400px) {
-  .footerMenu {
-    max-width: 96vw !important;
-  }
-} 
-
 @media (max-width: 370px) {
   .footerMenu {
     max-width: 90vw !important;

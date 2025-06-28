@@ -120,7 +120,6 @@ export const RouletteWheel: React.FC = () => {
     closeCase 
   } = useGameStore();
   const { user, addToInventory } = useUserStore();
-  const [selectedMultiplier, setSelectedMultiplier] = useState(1);
   const rouletteRef = useRef<HTMLDivElement>(null);
 
   // 🆕 Используем новую физику
@@ -149,8 +148,7 @@ export const RouletteWheel: React.FC = () => {
   const handleSpin = () => {
     if (!currentCase) return;
 
-    const totalPrice = currentCase.price * selectedMultiplier;
-    if (user.balance < totalPrice) {
+    if (user.balance < currentCase.price) {
       return;
     }
     
@@ -170,8 +168,7 @@ export const RouletteWheel: React.FC = () => {
   const handleQuickSpin = () => {
     if (!currentCase) return;
 
-    const totalPrice = currentCase.price * selectedMultiplier;
-    if (user.balance < totalPrice) {
+    if (user.balance < currentCase.price) {
       return;
     }
 
@@ -215,12 +212,6 @@ export const RouletteWheel: React.FC = () => {
     }
   }, [showResult, isSpinning, finalPosition]);
 
-  const handleMultiplierChange = (multiplier: number) => {
-    if (!isSpinning) {
-      setSelectedMultiplier(multiplier);
-    }
-  };
-
   const handleKeepPrize = () => {
     if (spinResult && currentCase) {
       addToInventory(spinResult.prize, currentCase.name);
@@ -252,7 +243,7 @@ export const RouletteWheel: React.FC = () => {
     });
   }
 
-  const totalPrice = currentCase.price * selectedMultiplier;
+  const totalPrice = currentCase.price;
   const hasEnoughFunds = user.balance >= totalPrice;
 
   return (
