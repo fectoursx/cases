@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
-  margin-bottom: 20px;
 }
 
 /* User Profile Section */
@@ -193,6 +192,7 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
   padding: var(--spacing-16);
+  margin-bottom: 90px;
 }
 
 .inventoryHeader {
