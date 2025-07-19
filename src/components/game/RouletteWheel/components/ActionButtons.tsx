@@ -1,5 +1,5 @@
 import React from 'react';
-import { ASSET_PATHS, MESSAGES } from '@/utils/constants';
+import { MESSAGES } from '@/utils/constants';
 import { THEME_COLORS } from '@/styles/theme';
 import styles from '../RouletteWheel.module.css';
 

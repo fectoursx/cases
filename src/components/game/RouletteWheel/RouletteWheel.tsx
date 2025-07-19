@@ -210,10 +210,7 @@ export const RouletteWheel: React.FC = () => {
     }
   };
 
-  const handleUpgrade = () => {
-    // Логика апгрейда
-    closeCase();
-  };
+
 
   if (!currentCase) return null;
 

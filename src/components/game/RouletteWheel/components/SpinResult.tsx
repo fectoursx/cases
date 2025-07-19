@@ -8,13 +8,11 @@ interface SpinResultDisplayProps {
   caseName: string;
   onKeepPrize: () => void;
   onQuickSell: () => void;
-  onUpgrade: () => void;
 }
 
 export const SpinResultDisplay: React.FC<SpinResultDisplayProps> = ({
   spinResult,
-  onKeepPrize,
-  onUpgrade
+  onKeepPrize
 }) => {
   return (
     <div className={styles.resultContainer}>

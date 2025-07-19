@@ -5,7 +5,7 @@ import { useUIStore } from '@/store/uiStore';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
-  const { user, isAuthenticated } = useUserStore();
+  const { user } = useUserStore();
   const { setActivePage } = useUIStore();
 
   const handleProfileClick = () => {
