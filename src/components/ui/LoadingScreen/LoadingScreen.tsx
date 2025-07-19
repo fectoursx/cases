@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTelegramAuth } from '@/hooks/useTelegramAuth';
+import { shouldUseGuestMode } from '@/utils/environment';
 import styles from './LoadingScreen.module.css';
 
 interface LoadingScreenProps {
@@ -31,6 +32,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
   };
 
   const getLoadingStatus = () => {
+    if (shouldUseGuestMode()) {
+      return 'Loading Gift Cases...';
+    }
+    
     switch (authStatus) {
       case 'loading':
         return 'Connecting to Telegram...';
@@ -64,7 +69,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
           
           <div className={styles.loaderContainer}>
             <div className={styles.spinner}></div>
-            <p className={styles.status}>{status}</p>
+            <p className={styles.status}>{shouldUseGuestMode() ? 'Loading Gift Cases...' : status}</p>
           </div>
         </div>
       </div>
@@ -88,7 +93,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </header>
       </div>
 
-      {authStatus === 'error' && (
+      {!shouldUseGuestMode() && authStatus === 'error' && (
         <div className={styles.errorContainer}>
           <div className={styles.errorIcon}>⚠️</div>
           <h2 className={styles.errorTitle}>Authentication Error</h2>
@@ -101,7 +106,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({
         </div>
       )}
 
-      {authStatus !== 'error' && (
+      {(!shouldUseGuestMode() && authStatus === 'error') ? null : (
         <div className={styles.loaderStatus}>
           <div className={styles.spinner}></div>
           <p className={styles.statusText}>{getLoadingStatus()}</p>

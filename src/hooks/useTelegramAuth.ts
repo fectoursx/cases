@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { telegramAuth } from '@/services/telegramAuth';
 import { ParsedTelegramUser, AuthStatus } from '@/types/telegram';
+import { shouldUseGuestMode } from '@/utils/environment';
 
 interface UseTelegramAuthReturn {
   user: ParsedTelegramUser | null;
@@ -20,6 +21,13 @@ export const useTelegramAuth = (): UseTelegramAuthReturn => {
   const [isWebAppAvailable] = useState(() => telegramAuth.isAvailable());
 
   const authenticate = useCallback(async () => {
+    // В guest режиме не пытаемся авторизоваться
+    if (shouldUseGuestMode()) {
+      console.log('Guest mode - skipping Telegram authentication');
+      setStatus('idle');
+      return;
+    }
+
     if (!isWebAppAvailable) {
       // Если Telegram WebApp недоступен, просто завершаем без ошибки
       console.log('Telegram WebApp is not available - running in fallback mode');
@@ -72,9 +80,9 @@ export const useTelegramAuth = (): UseTelegramAuthReturn => {
     }
   }, [isWebAppAvailable]);
 
-  // Автоматическая авторизация при загрузке (только если WebApp доступен)
+  // Автоматическая авторизация при загрузке (только если WebApp доступен и не guest режим)
   useEffect(() => {
-    if (isWebAppAvailable && status === 'idle') {
+    if (isWebAppAvailable && status === 'idle' && !shouldUseGuestMode()) {
       // Небольшая задержка для стабилизации WebApp
       const timeoutId = setTimeout(() => {
         authenticate();

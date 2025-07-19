@@ -31,7 +31,12 @@ export const ProfilePage: React.FC = () => {
           <div className={styles.balanceLabel}>Balance</div>
           <div className={styles.balanceValue}>
             {user.balance.toFixed(2)}
-            <div className={styles.tokenIcon}>V</div>
+            
+             <img 
+                      src="/assets/images/ton.svg" 
+                      alt="TON" 
+                      style={{ width: '25px', height: '25px' }}
+             />
           </div>
         </div>
         <Button className={styles.depositButton}>

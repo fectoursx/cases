@@ -49,12 +49,17 @@
 
 /* Balance Section */
 .balanceContainer {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-16);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+background: linear-gradient(115.39deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .05) 100%);
+    border-radius: 12px;
+    padding: 12px 16px;    display: flex
+;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    transition: all .3s ease;
 }
 
 .balanceInfo {
@@ -73,7 +78,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
-  font-size: 28px;
+  font-size: 22px;
   font-weight: var(--font-weight-bold);
   color: var(--color-text);
 }
@@ -94,6 +99,7 @@
 .depositButton {
   background: #0090FF;
   color: white;
+  width: 125px;
   border: none;
   padding: var(--spacing-12) var(--spacing-16);
   border-radius: var(--radius-md);
@@ -105,12 +111,15 @@
 
 /* Wallet Section */
 .walletContainer {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-16);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    background: linear-gradient(115.39deg, rgba(255, 255, 255, 0) 0%, rgba(0, 117, 255, .15) 100%);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex
+;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .walletInfo {
@@ -175,6 +184,7 @@
 .inviteButton {
   background: white;
   color: #0090FF;
+  color: black;
   border: none;
   padding: var(--spacing-8) var(--spacing-16);
   border-radius: var(--radius-md);
@@ -189,7 +199,6 @@
 
 /* Inventory Section */
 .inventoryContainer {
-  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-lg);
   padding: var(--spacing-16);
   margin-bottom: 90px;

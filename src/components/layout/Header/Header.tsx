@@ -2,11 +2,13 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useUserStore } from '@/store/userStore';
 import { useUIStore } from '@/store/uiStore';
+import { shouldUseGuestMode } from '@/utils/environment';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
   const { user } = useUserStore();
   const { setActivePage } = useUIStore();
+  const isGuestMode = shouldUseGuestMode();
 
   const handleProfileClick = () => {
     setActivePage('profile');
@@ -29,6 +31,7 @@ export const Header: React.FC = () => {
           <div className={styles.profileInfo}>
             <div className={styles.profileName}>
               {user.name}
+              {isGuestMode && <span className={styles.guestBadge}> (Guest)</span>}
             </div>
           </div>
         </div>

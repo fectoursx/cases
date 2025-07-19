@@ -8,6 +8,7 @@ import { HomePage } from '@/pages/HomePage';
 import { ProfilePage } from '@/pages/ProfilePage';
 import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { BottomNavigation } from '@/components/layout/BottomNavigation';
+import { shouldUseGuestMode } from '@/utils/environment';
 import './App.css';
 
 const AppContent: React.FC = () => {
@@ -20,13 +21,17 @@ const AppContent: React.FC = () => {
 
   // Обрабатываем авторизацию пользователя
   useEffect(() => {
-    // Если Telegram WebApp недоступен (dev режим), пропускаем загрузочный экран
-    if (!isWebAppAvailable) {
-      setInitializationComplete(true);
-      setShowLoadingPage(false);
+    if (shouldUseGuestMode()) {
+      // В guest режиме показываем быстрый загрузочный экран
+      console.log('Running in guest mode (development or no Telegram WebApp)');
+      setTimeout(() => {
+        setInitializationComplete(true);
+        setShowLoadingPage(false);
+      }, 2000); // 2 секунды для показа загрузочного экрана
       return;
     }
 
+    // Telegram WebApp режим
     if (telegramUser && authStatus === 'authenticated') {
       setTelegramUser(telegramUser);
       
@@ -55,16 +60,16 @@ const AppContent: React.FC = () => {
     }
   }, [telegramUser, authStatus, setTelegramUser, isWebAppAvailable, initializationComplete]);
 
-  // Показываем LoadingPage если Telegram WebApp доступен и инициализация не завершена
-  if (isWebAppAvailable && showLoadingPage) {
+  // Показываем LoadingPage если инициализация не завершена
+  if (showLoadingPage) {
     return (
       <LoadingScreen 
         mode="telegram-auth"
-        onRetry={() => {
+        onRetry={!shouldUseGuestMode() ? () => {
           // Сбрасываем состояние для повторной попытки
           setShowLoadingPage(false);
           setTimeout(() => setShowLoadingPage(true), 100);
-        }}
+        } : undefined}
       />
     );
   }
