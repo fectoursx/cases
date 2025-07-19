@@ -12,55 +12,30 @@ interface LiveItem {
 export const LiveStatusBar: React.FC = () => {
   const [liveItems, setLiveItems] = useState<LiveItem[]>([]);
 
-  // Моковые данные для демонстрации
+  // Расширенные моковые данные для демонстрации
   const mockLiveItems: LiveItem[] = [
-    {
-      id: 1,
-      image: '/assets/images/frog.png',
-      name: 'Mystic Frog',
-      price: 1562.28,
-      userName: 'Player123'
-    },
-    {
-      id: 2,
-      image: '/assets/images/diamond.png',
-      name: 'Diamond',
-      price: 48.15,
-      userName: 'GamerX'
-    },
-    {
-      id: 3,
-      image: '/assets/images/dragon.png',
-      name: 'Dragon',
-      price: 89.99,
-      userName: 'CoolUser'
-    },
-    {
-      id: 4,
-      image: '/assets/images/wizard-hat.png',
-      name: 'Wizard Hat',
-      price: 35.20,
-      userName: 'MagicFan'
-    },
-    {
-      id: 5,
-      image: '/assets/images/wizard-hat.png',
-      name: 'Wizard Hat',
-      price: 35.20,
-      userName: 'MagicFan'
-    },
-    {
-      id: 6,
-      image: '/assets/images/dragon.png',
-      name: 'Dragon',
-      price: 89.99,
-      userName: 'CoolUser'
-    }
+    { id: 1, image: '/assets/images/frog.png', name: 'Mystic Frog', price: 1562.28, userName: 'Player123' },
+    { id: 2, image: '/assets/images/diamond.png', name: 'Diamond', price: 48.15, userName: 'GamerX' },
+    { id: 3, image: '/assets/images/dragon.png', name: 'Dragon', price: 89.99, userName: 'CoolUser' },
+    { id: 4, image: '/assets/images/wizard-hat.png', name: 'Wizard Hat', price: 35.20, userName: 'MagicFan' },
+    { id: 5, image: '/assets/images/helmet.png', name: 'Knight Helmet', price: 75.50, userName: 'SirLoot' },
+    { id: 6, image: '/assets/images/scroll.png', name: 'Ancient Scroll', price: 120.00, userName: 'Explorer' },
+    { id: 7, image: '/assets/images/teddy.png', name: 'Cursed Teddy', price: 66.60, userName: 'Spooky' },
+    { id: 10, image: '/assets/images/gift.png', name: 'Mystery Gift', price: 25.00, userName: 'Lucky' },
+    { id: 11, image: '/assets/images/burger.png', name: 'Legendary Burger', price: 99.99, userName: 'Foodie' },
   ];
 
   useEffect(() => {
-    // Симулируем получение live данных
-    setLiveItems(mockLiveItems);
+    // Генерируем большое количество начальных элементов, чтобы заполнить экран
+    const initialItems = Array.from({ length: 40 }, (_, i) => {
+        const randomItem = mockLiveItems[Math.floor(Math.random() * mockLiveItems.length)];
+        return {
+            ...randomItem,
+            id: Date.now() + i, // уникальный id
+            userName: `User${Math.floor(Math.random() * 1000)}`
+        };
+    });
+    setLiveItems(initialItems);
 
     // Симулируем периодическое обновление
     const interval = setInterval(() => {
@@ -75,7 +50,7 @@ export const LiveStatusBar: React.FC = () => {
         });
         return newItems;
       });
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);

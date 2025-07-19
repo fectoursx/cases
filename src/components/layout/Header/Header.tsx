@@ -2,11 +2,10 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useUserStore } from '@/store/userStore';
 import { useUIStore } from '@/store/uiStore';
-import { ASSET_PATHS } from '@/utils/constants';
 import styles from './Header.module.css';
 
 export const Header: React.FC = () => {
-  const { user } = useUserStore();
+  const { user, isAuthenticated } = useUserStore();
   const { setActivePage } = useUIStore();
 
   const handleProfileClick = () => {
@@ -17,9 +16,20 @@ export const Header: React.FC = () => {
     <header className={styles.userHeader}>
       <div className={styles.userHeaderRow}>
         <div className={styles.profile} onClick={handleProfileClick}>
-          <img src={ASSET_PATHS.IMAGES.AVATAR} alt="User Avatar" className={styles.avatar} />
+          <img 
+            src={user.avatar} 
+            alt="User Avatar" 
+            className={styles.avatar}
+            onError={(e) => {
+              // Fallback к дефолтной аватарке при ошибке загрузки
+              const target = e.target as HTMLImageElement;
+              target.src = '/assets/images/avatar.png';
+            }}
+          />
           <div className={styles.profileInfo}>
-            <div className={styles.profileName}>{user.name}</div>
+            <div className={styles.profileName}>
+              {user.name}
+            </div>
           </div>
         </div>
         
@@ -34,7 +44,11 @@ export const Header: React.FC = () => {
             <div className={styles.coinCount}>{user.balance.toFixed(2)}</div>
             <div className={styles.coinContainer}>
               <div className={styles.coin}>
-                <div className={styles.coinIcon}>V</div>
+                <img 
+                  className={styles.coinIcon} 
+                  src="/assets/images/ton.svg" 
+                  alt="TON"
+                />
               </div>
             </div>
           </div>

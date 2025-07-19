@@ -8,7 +8,6 @@ interface ActionButtonsProps {
   hasEnoughFunds: boolean;
   spinCost: number;
   onSpin: () => void;
-  onQuickSpin: () => void;
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({
@@ -16,7 +15,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   hasEnoughFunds,
   spinCost,
   onSpin,
-  onQuickSpin
 }) => {
   return (
     <>
@@ -26,24 +24,16 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
           onClick={onSpin}
           disabled={isSpinning || !hasEnoughFunds}
         >
-          {isSpinning ? MESSAGES.SPINNING : `Spin ${spinCost.toFixed(2)}`}
-          <img 
-            src={ASSET_PATHS.IMAGES.TON} 
-            alt="TON" 
-            style={{ width: '16px', height: '16px', marginLeft: '8px' }}
-          />
-        </button>
-        <button 
-          className={styles.quickSpinButton}
-          onClick={onQuickSpin}
-          disabled={isSpinning || !hasEnoughFunds}
-        >
-          Quick Spin {spinCost.toFixed(2)}
-          <img 
-            src={ASSET_PATHS.IMAGES.TON} 
-            alt="TON" 
-            style={{ width: '14px', height: '14px' }}
-          />
+                <div className={styles.buttonLabel}> {isSpinning ? 'Spinning...' : `Spin`} </div>
+              
+              <div className={styles.priceTag}>
+               <div className={styles.priceValue}>{spinCost.toFixed(2)}</div>
+               <div className={styles.coinSmall}>
+                 <div className={styles.coin}>
+                   <img className={styles.coinImage} src="/assets/images/ton.svg" alt="Coin" />
+                 </div>
+               </div>
+               </div>
         </button>
       </div>
 

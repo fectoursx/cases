@@ -41,7 +41,19 @@
 .profileName {
   color: var(--color-text);
   font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
   font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70px;
+}
+
+.guestBadge {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
 }
 
 .walletSection {

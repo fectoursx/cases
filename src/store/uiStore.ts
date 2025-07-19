@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 import { NavigationPage } from '@/types/ui';
 
+interface Notification {
+  id: string;
+  type: 'info' | 'success' | 'error';
+  message: string;
+  duration?: number;
+}
+
 interface UIState {
   activePage: NavigationPage;
   isModalOpen: boolean;
@@ -9,16 +16,9 @@ interface UIState {
   notifications: Notification[];
 }
 
-interface Notification {
-  id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
-  message: string;
-  duration?: number;
-}
-
 interface UIActions {
-  setActivePage: (page: NavigationPage) => void;
-  openModal: (type: string) => void;
+  setActivePage: (activePage: NavigationPage) => void;
+  openModal: (modalType: string) => void;
   closeModal: () => void;
   setLoading: (loading: boolean) => void;
   addNotification: (notification: Omit<Notification, 'id'>) => void;
@@ -35,10 +35,10 @@ export const useUIStore = create<UIState & UIActions>((set) => ({
 
   setActivePage: (activePage) => set({ activePage }),
 
-  openModal: (modalType) => 
+  openModal: (modalType) =>
     set({ isModalOpen: true, modalType }),
 
-  closeModal: () => 
+  closeModal: () =>
     set({ isModalOpen: false, modalType: null }),
 
   setLoading: (loading) => set({ loading }),
@@ -65,5 +65,5 @@ export const useUIStore = create<UIState & UIActions>((set) => ({
       notifications: state.notifications.filter(n => n.id !== id)
     })),
 
-  clearNotifications: () => set({ notifications: [] })
+  clearNotifications: () => set({ notifications: [] }),
 })); 

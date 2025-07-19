@@ -5,8 +5,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
+  background-color: #000c;
+  display: flex
+;
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -14,13 +15,25 @@
   transform: translateZ(0);
   overscroll-behavior: contain;
 }
+.modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, .3);
+}
+
+@media (max-width: 420px) {
+  .modal {
+    max-width: 100% !important;
+    padding: 16px 12px 12px !important;
+    gap: 24px !important;
+  }
+}
 
 /* Основное модальное окно */
 .modal {
   background: var(--color-background);
   border-radius: var(--radius-lg);
-  padding: 24px 16px 16px;
-  display: flex;
+  padding: 24px 16px 0px 16px;
+  display: flex
+;
   flex-direction: column;
   gap: 32px;
   align-items: center;
@@ -31,8 +44,7 @@
   position: relative;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
-  animation: modalOpen 0.3s ease-out;
+  scrollbar-color: rgba(255, 255, 255, .2) rgba(255, 255, 255, .05);
 }
 
 /* Скроллбар для webkit браузеров */
@@ -112,7 +124,6 @@
 /* Контент модального окна */
 .content {
   width: 100%;
-  overflow-y: auto;
   flex: 1;
 }
 

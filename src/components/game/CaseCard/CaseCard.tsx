@@ -72,7 +72,7 @@ export const CaseCard: React.FC<CaseCardProps> = ({ caseData }) => {
         <div className={styles.coin}>
           <img 
             className={styles.coinImage} 
-            src="/images/actions/ton.svg" 
+            src="/assets/images/ton.svg" 
             alt="Coin"
           />
         </div>

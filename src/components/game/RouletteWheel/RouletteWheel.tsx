@@ -119,7 +119,7 @@ export const RouletteWheel: React.FC = () => {
     startSpin, 
     closeCase 
   } = useGameStore();
-  const { user, addToInventory } = useUserStore();
+  const { user, addToInventory, updateBalance } = useUserStore();
   const rouletteRef = useRef<HTMLDivElement>(null);
 
   // 🆕 Используем новую физику
@@ -152,6 +152,9 @@ export const RouletteWheel: React.FC = () => {
       return;
     }
     
+    // Списываем средства за спин
+    updateBalance(-currentCase.price);
+    
     // Рассчитываем случайный индекс выигрышного элемента
     const randomItemIndex = Math.floor(Math.random() * currentCase.items.length);
     
@@ -165,26 +168,6 @@ export const RouletteWheel: React.FC = () => {
     startSpin(randomItemIndex);
   };
 
-  const handleQuickSpin = () => {
-    if (!currentCase) return;
-
-    if (user.balance < currentCase.price) {
-      return;
-    }
-
-    // Рассчитываем случайный индекс выигрышного элемента
-    const randomItemIndex = Math.floor(Math.random() * currentCase.items.length);
-    
-    // Устанавливаем финальную позицию анимации
-    const position = calculateFinalPosition(randomItemIndex);
-    setFinalPosition(position);
-    
-    // 🆕 Проигрываем звук
-    playSound('spin');
-    
-    startSpin(randomItemIndex);
-  };
-
   const handleClose = () => {
     setFinalPosition(0);
     closeCase();
@@ -193,12 +176,12 @@ export const RouletteWheel: React.FC = () => {
   // 🆕 Проигрываем звук при выигрыше
   useEffect(() => {
     if (showResult && spinResult) {
-      const rarity = spinResult.prize.rarity || 'common';
-      if (rarity === 'legendary' || rarity === 'epic') {
-        playSound('rare');
-      } else {
-        playSound('win');
-      }
+      // const rarity = spinResult.prize.rarity || 'common';
+      // if (rarity === 'legendary' || rarity === 'epic') {
+      //   playSound('rare');
+      // } else {
+      //   playSound('win');
+      // }
     }
   }, [showResult, spinResult, playSound]);
 
@@ -222,6 +205,7 @@ export const RouletteWheel: React.FC = () => {
   const handleQuickSell = () => {
     if (spinResult) {
       // Добавляем цену приза к балансу пользователя
+      updateBalance(spinResult.prize.price);
       closeCase();
     }
   };
@@ -242,6 +226,8 @@ export const RouletteWheel: React.FC = () => {
       uniqueId: `${item.id}-${i}`
     });
   }
+
+  const sortedPrizes = [...currentCase.items].sort((a, b) => b.price - a.price);
 
   const totalPrice = currentCase.price;
   const hasEnoughFunds = user.balance >= totalPrice;
@@ -291,24 +277,17 @@ export const RouletteWheel: React.FC = () => {
               onClick={handleSpin}
               disabled={isSpinning || !hasEnoughFunds}
             >
-              {isSpinning ? 'Spinning...' : `Spin ${totalPrice.toFixed(2)}`}
-              <img 
-                src="/assets/images/ton.svg" 
-                alt="TON" 
-                style={{ width: '16px', height: '16px', marginLeft: '8px' }}
-              />
-            </button>
-            <button 
-              className={styles.quickSpinButton}
-              onClick={handleQuickSpin}
-              disabled={isSpinning || !hasEnoughFunds}
-            >
-              Quick Spin {totalPrice.toFixed(2)}
-              <img 
-                src="/assets/images/ton.svg" 
-                alt="TON" 
-                style={{ width: '14px', height: '14px' }}
-              />
+             <div className={styles.buttonLabel}>  {isSpinning ? 'Spinning...' : `Spin`} </div>
+              
+             <div className={styles.priceTag}>
+              <div className={styles.priceValue}>{totalPrice.toFixed(2)}</div>
+              <div className={styles.coinSmall}>
+                <div className={styles.coin}>
+                  <img className={styles.coinImage} src="/assets/images/ton.svg" alt="Coin" />
+                </div>
+              </div>
+              </div>
+            
             </button>
           </div>
 
@@ -327,7 +306,7 @@ export const RouletteWheel: React.FC = () => {
           <div className={styles.prizesSection}>
             <div className={styles.prizesTitle}>Possible prizes:</div>
             <div className={styles.prizesGrid}>
-              {currentCase.items.map((item) => (
+              {sortedPrizes.map((item) => (
                 <div key={item.id} className={styles.prizeGridItem}>
                   <img src={item.image} alt={item.name} />
                   <div className={styles.prizePrice}>
@@ -344,13 +323,15 @@ export const RouletteWheel: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.resultContainer}>
+        <div className={styles.modal}>
+          <div className={styles.resultContainer}>
+         
           <div style={{ 
             fontSize: '18px', 
             color: 'rgba(255, 255, 255, 0.7)', 
             marginBottom: '8px' 
           }}>
-            {currentCase.name}
+            {spinResult?.prize.name}
           </div>
           
           <div style={{
@@ -403,14 +384,10 @@ export const RouletteWheel: React.FC = () => {
               </div>
             )}
           </div>
-
+          </div>
           <div className={styles.resultActions}>
-            <button 
-              className={styles.keepButton}
-              onClick={handleKeepPrize}
-            >
-              Keep it
-            </button>
+            <button onClick={handleKeepPrize} className={`${styles.spinButton} ${styles.centered}`}><div className={styles.buttonLabel}>Keep it</div></button>
+
             <button 
               className={styles.quickSellButton}
               onClick={handleQuickSell}
@@ -422,19 +399,13 @@ export const RouletteWheel: React.FC = () => {
                 style={{ width: '14px', height: '14px' }}
               />
             </button>
-            <button 
-              className={styles.upgradeButton}
-              onClick={handleUpgrade}
-            >
-              Upgrade
-            </button>
           </div>
 
           {/* Возможные призы в результате */}
           <div className={styles.prizesSection}>
             <div className={styles.prizesTitle}>Possible prizes:</div>
             <div className={styles.prizesGrid}>
-              {currentCase.items.slice(0, 9).map((item) => (
+              {sortedPrizes.slice(0, 9).map((item) => (
                 <div key={item.id} className={styles.prizeGridItem}>
                   <img src={item.image} alt={item.name} />
                   <div className={styles.prizePrice}>

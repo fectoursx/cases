@@ -14,7 +14,7 @@ export const useRoulette = () => {
     startSpin, 
     closeCase 
   } = useGameStore();
-  const { user } = useUserStore();
+  const { user, updateBalance } = useUserStore();
   const [selectedMultiplier, setSelectedMultiplier] = useState(1);
   const [finalPosition, setFinalPosition] = useState(0);
 
@@ -25,26 +25,17 @@ export const useRoulette = () => {
       return;
     }
     
+    // Списываем средства за спин
+    const spinCost = RouletteService.calculateSpinCost(currentCase, selectedMultiplier);
+    updateBalance(-spinCost);
+    
     const randomItemIndex = RouletteService.generateWinningIndex(currentCase.items.length);
     const position = RouletteService.calculateFinalPosition(randomItemIndex, currentCase.items.length);
     setFinalPosition(position);
     
     startSpin(randomItemIndex);
-  }, [currentCase, selectedMultiplier, user.balance, startSpin]);
+  }, [currentCase, selectedMultiplier, user.balance, startSpin, updateBalance]);
 
-  const handleQuickSpin = useCallback(() => {
-    if (!currentCase) return;
-
-    if (!RouletteService.canAffordSpin(currentCase, selectedMultiplier, user.balance)) {
-      return;
-    }
-
-    const randomItemIndex = RouletteService.generateWinningIndex(currentCase.items.length);
-    const position = RouletteService.calculateFinalPosition(randomItemIndex, currentCase.items.length);
-    setFinalPosition(position);
-    
-    startSpin(randomItemIndex);
-  }, [currentCase, selectedMultiplier, user.balance, startSpin]);
 
   const handleClose = useCallback(() => {
     setFinalPosition(0);
@@ -91,7 +82,6 @@ export const useRoulette = () => {
     
     // Actions
     handleSpin,
-    handleQuickSpin,
     handleClose,
     handleMultiplierChange,
     resetPosition,

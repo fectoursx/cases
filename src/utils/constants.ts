@@ -57,8 +57,8 @@ export const ASSET_PATHS = {
     PROFILE: '/assets/images/profile.svg',
     SCROLL: '/assets/images/scroll.png',
     TEDDY: '/assets/images/teddy.png',
-    TOKEN_GOLD: '/assets/images/token-gold.png',
-    TOKEN: '/assets/images/token.png',
+    TOKEN_GOLD: '/assets/images/ton.svg',
+    TOKEN: '/assets/images/ton.svg',
     TON: '/assets/images/ton.svg',
     UPGRADE: '/assets/images/upgrade.svg',
     WIZARD_HAT: '/assets/images/wizard-hat.png'

@@ -78,7 +78,7 @@ export const ProfilePage: React.FC = () => {
         <div className={styles.inventorySection}>
           {user.inventory.length === 0 ? (
             <div className={styles.emptyInventory}>
-              <p>You haven't opened any cases yet</p>
+              <p>You haven&apos;t opened any cases yet</p>
               <Button className={styles.openCasesButton} onClick={() => setActivePage('main')}>
                 Open Cases
               </Button>

@@ -1,17 +1,73 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { useUIStore } from '@/store/uiStore';
+import { useUserStore } from '@/store/userStore';
 import { useTelegramWebApp } from '@/hooks/useTelegramWebApp';
+import { useTelegramAuth } from '@/hooks/useTelegramAuth';
 import { HomePage } from '@/pages/HomePage';
 import { ProfilePage } from '@/pages/ProfilePage';
+import { LoadingScreen } from '@/components/ui/LoadingScreen';
 import { BottomNavigation } from '@/components/layout/BottomNavigation';
 import './App.css';
 
 const AppContent: React.FC = () => {
   const { activePage } = useUIStore();
-  const { webApp, isExpanded, isAvailable } = useTelegramWebApp();
+  const { setTelegramUser } = useUserStore();
+  const { isExpanded, isAvailable } = useTelegramWebApp();
+  const { user: telegramUser, status: authStatus, isWebAppAvailable } = useTelegramAuth();
+  const [initializationComplete, setInitializationComplete] = useState(false);
+  const [showLoadingPage, setShowLoadingPage] = useState(true);
 
-  useEffect(() => {  }, [webApp]);
+  // Обрабатываем авторизацию пользователя
+  useEffect(() => {
+    // Если Telegram WebApp недоступен (dev режим), пропускаем загрузочный экран
+    if (!isWebAppAvailable) {
+      setInitializationComplete(true);
+      setShowLoadingPage(false);
+      return;
+    }
+
+    if (telegramUser && authStatus === 'authenticated') {
+      setTelegramUser(telegramUser);
+      
+      // Задержка для показа успешной авторизации
+      setTimeout(() => {
+        setInitializationComplete(true);
+        setShowLoadingPage(false);
+      }, 1500);
+    } else if (authStatus === 'error') {
+      // При ошибке авторизации показываем LoadingPage с ошибкой
+      setShowLoadingPage(true);
+    } else if (authStatus === 'loading') {
+      // Показываем загрузочный экран во время авторизации
+      setShowLoadingPage(true);
+    } else if (authStatus === 'idle') {
+      // Если статус idle более 3 секунд, показываем приложение
+      const timeoutId = setTimeout(() => {
+        if (!initializationComplete) {
+          console.log('Auth timeout - proceeding without Telegram auth');
+          setInitializationComplete(true);
+          setShowLoadingPage(false);
+        }
+      }, 3000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [telegramUser, authStatus, setTelegramUser, isWebAppAvailable, initializationComplete]);
+
+  // Показываем LoadingPage если Telegram WebApp доступен и инициализация не завершена
+  if (isWebAppAvailable && showLoadingPage) {
+    return (
+      <LoadingScreen 
+        mode="telegram-auth"
+        onRetry={() => {
+          // Сбрасываем состояние для повторной попытки
+          setShowLoadingPage(false);
+          setTimeout(() => setShowLoadingPage(true), 100);
+        }}
+      />
+    );
+  }
 
   const renderPage = () => {
     switch (activePage) {

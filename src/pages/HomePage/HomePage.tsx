@@ -33,11 +33,10 @@ export const HomePage: React.FC = () => {
 
         {/* Free case banner */}
         <div className={styles.freeCaseBanner}>
-          
           <div className={styles.bannerContent}>
             <div className={styles.lightningIcon}>
-            <img src={ASSET_PATHS.IMAGES.LIGHTNING} alt="Lightning" />
-          </div>
+              <img src={ASSET_PATHS.IMAGES.LIGHTNING} alt="Lightning" />
+            </div>
             <div className={styles.bannerText}>{MESSAGES.CHECK_NEWS}</div>
           </div>
           <Button size="sm" className={styles.telegramButton}>

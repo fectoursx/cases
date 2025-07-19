@@ -1,6 +1,5 @@
 /* Live Status Bar */
 .liveStatusBar {
-     background: rgba(255, 255, 255, .02);
     border-radius: var(--radius-md);
     display: flex
 ;
@@ -65,14 +64,13 @@
   gap: 3px;
   align-items: center;
   flex: 1;
-  margin-left: 40px;
+  margin-left: 30px;
   overflow: hidden;
-  padding: var(--spacing-8);
+  padding-left: 8px;
 }
 
 /* Individual live item */
 .liveItem {
-  border-radius: var(--radius-md);
   flex-shrink: 0;
   position: relative;
   overflow: hidden;

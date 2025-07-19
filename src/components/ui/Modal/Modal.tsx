@@ -47,13 +47,13 @@ export const Modal: React.FC<ModalProps> = ({
         className={clsx(styles.modal, styles[size])}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.header}>
-          {title && <h2 className={styles.title}>{title}</h2>}
-          <button className={styles.closeButton} onClick={onClose}>
-            <X size={20} />
-          </button>
-        </div>
         <div className={styles.content}>
+          <div className={styles.header}>
+            {title && <h2 className={styles.title}>{title}</h2>}
+            <button className={styles.closeButton} onClick={onClose}>
+              <X size={20} />
+            </button>
+          </div>
           {children}
         </div>
       </div>

@@ -1,21 +1,5 @@
 import { useEffect, useState } from 'react';
-
-interface TelegramWebApp {
-  ready(): void;
-  expand(): void;
-  isExpanded: boolean;
-  viewportHeight: number;
-  viewportStableHeight: number;
-  setHeaderColor(color: string): void;
-  setBackgroundColor(color: string): void;
-  enableClosingConfirmation(): void;
-  disableClosingConfirmation(): void;
-  MainButton: {
-    setText(text: string): void;
-    show(): void;
-    hide(): void;
-  };
-}
+import { TelegramWebApp } from '@/types/telegram';
 
 export const useTelegramWebApp = () => {
   const [webApp, setWebApp] = useState<TelegramWebApp | null>(null);
@@ -56,13 +40,13 @@ export const useTelegramWebApp = () => {
       };
       
       // Добавляем обработчик событий (если поддерживается)
-      if ('addEventListener' in tg) {
-        (tg as any).addEventListener('viewportChanged', handleViewportChanged);
+      if ('onEvent' in tg) {
+        tg.onEvent('viewportChanged', handleViewportChanged);
       }
       
       return () => {
-        if ('removeEventListener' in tg) {
-          (tg as any).removeEventListener('viewportChanged', handleViewportChanged);
+        if ('offEvent' in tg) {
+          tg.offEvent('viewportChanged', handleViewportChanged);
         }
       };
     }

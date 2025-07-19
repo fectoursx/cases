@@ -45,7 +45,12 @@ export const BottomNavigation: React.FC = () => {
 
   const handleTabClick = (tab: NavigationTab) => {
     if (tab.id === 'jackpot') {
-      window.open('https://youtube.com', '_blank', 'noopener,noreferrer');
+      if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.openLink('https://www.speedtest.net/');
+      } else {
+        // Fallback for when not in Telegram
+        window.open('https://www.speedtest.net/', '_blank', 'noopener,noreferrer');
+      }
     } else {
       setActivePage(tab.id as any);
     }
